@@ -33,20 +33,23 @@ function RegisterEmployee() {
     fetchEmployees();
   }, []);
 
-  const fetchEmployees = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/emp/all');
-      if (response.ok) {
-        const data = await response.json();
-        setEmployees(data);
-      }
-    } catch (error) {
-      console.error('Error fetching employees:', error);
-    } finally {
-      setLoading(false);
+ const fetchEmployees = async () => {
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/emp/all`
+    );
+    const contentType = response.headers.get("content-type");
+    if (!contentType || !contentType.includes("application/json")) {
+      console.log("Backend still waking up...");
+      setTimeout(fetchEmployees, 3000); // retry after 3 seconds
+      return;
     }
-  };
+    const data = await response.json();
+    setEmployees(data);
+  } catch (error) {
+    console.error('Error fetching employees:', error);
+  }
+};
 
   const handleLogout = () => {
     try {
