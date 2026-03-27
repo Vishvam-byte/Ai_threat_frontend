@@ -26,9 +26,9 @@ function AllLogs() {
         setIsRefreshing(true);
         try {
             const [logsRes, networkRes, emailsRes] = await Promise.all([
-                fetch('${import.meta.env.VITE_API_URL}/api/attackLogs/all'),
-                fetch('${import.meta.env.VITE_API_URL}/api/attackNetworkEvent/all'),
-                fetch('${import.meta.env.VITE_API_URL}/api/attackPhishing/all')
+                fetch(`${import.meta.env.VITE_API_URL}/api/attackLogs/all`),
+                fetch(`${import.meta.env.VITE_API_URL}/api/attackNetworkEvent/all`),
+                fetch(`${import.meta.env.VITE_API_URL}/api/attackPhishing/all`)
             ]);
             
             const logsData = await logsRes.json();

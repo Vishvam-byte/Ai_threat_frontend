@@ -33,7 +33,7 @@ function RegisterAnalyst() {
   const fetchAnalysts = async () => {
     setLoading(true);
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/analyst/all');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyst/all`);
       if (response.ok) {
         const data = await response.json();
         setAnalysts(data);
@@ -73,7 +73,7 @@ function RegisterAnalyst() {
     setMessage({ type: '', text: '' });
 
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/analyst/register', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyst/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

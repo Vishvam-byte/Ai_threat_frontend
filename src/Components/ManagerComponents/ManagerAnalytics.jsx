@@ -45,7 +45,7 @@ function ManagerAnalytics() {
 
   const fetchOverview = async () => {
     try {
-      const res = await fetch('${import.meta.env.VITE_API_URL}/api/analytics/overview');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics/overview`);
       const data = await res.json();
       setOverview(data);
     } catch (err) {
@@ -55,7 +55,7 @@ function ManagerAnalytics() {
 
   const fetchByEmployee = async () => {
     try {
-      const res = await fetch('${import.meta.env.VITE_API_URL}/api/analytics/by-employee');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics/by-employee`);
       const data = await res.json();
       setByEmployee(data);
     } catch (err) {
@@ -65,7 +65,7 @@ function ManagerAnalytics() {
 
   const fetchTopRisk = async () => {
     try {
-      const res = await fetch('${import.meta.env.VITE_API_URL}/api/analytics/top-risk?topN=5');
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/analytics/top-risk?topN=5`);
       const data = await res.json();
       setTopRisk(data);
     } catch (err) {

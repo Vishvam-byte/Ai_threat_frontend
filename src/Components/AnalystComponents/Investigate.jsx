@@ -27,7 +27,7 @@ function AnalystInvestigate() {
 
     useEffect(() => {
         // Fetch all employees
-        axios.get('${import.meta.env.VITE_API_URL}/api/emp/all')
+        axios.get(`${import.meta.env.VITE_API_URL}/api/emp/all`)
             .then(res => setEmployees(res.data))
             .catch(err => console.error(err));
     }, []);
@@ -59,7 +59,7 @@ function AnalystInvestigate() {
             return;
         }
 
-        axios.get('${import.meta.env.VITE_API_URL}/api/correlate/report', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/correlate/report`, {
             params: {
                 employeeEmail: selectedEmployee,
                 startDate: new Date(startDate).toISOString(),

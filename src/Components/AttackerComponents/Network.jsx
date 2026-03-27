@@ -17,13 +17,17 @@ function Network() {
 
     const [loading, setLoading] = useState(false);
     const [responseMsg, setResponseMsg] = useState('');
+    const [fetchError, setFetchError] = useState(null);
 
     // FETCH EMPLOYEES
     useEffect(() => {
-        fetch("${import.meta.env.VITE_API_URL}/api/emp/all")
+        fetch(`${import.meta.env.VITE_API_URL}/api/emp/all`)
             .then(res => res.json())
             .then(data => setEmployees(data))
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log(err);
+                setFetchError("Unable to load employees. Backend may be starting up, please refresh.");
+            });
     }, []);
 
     useEffect(() => {
@@ -193,6 +197,13 @@ function Network() {
             <div className="pt-24 px-6 max-w-5xl mx-auto">
 
                 <h1 className="text-3xl font-bold text-white mb-6">Network Attack Simulation</h1>
+
+                {fetchError && (
+                    <div className="mb-4 p-3 rounded-lg bg-yellow-600 text-white flex items-center gap-2">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                        {fetchError}
+                    </div>
+                )}
 
                 <div className="bg-gray-800/60 p-6 rounded-xl shadow-xl border border-gray-700">
 

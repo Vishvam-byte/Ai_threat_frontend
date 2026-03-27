@@ -24,6 +24,7 @@ function Phishing() {
 
     const [message, setMessage] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [fetchError, setFetchError] = useState(null);
 
     const navigate = useNavigate();
 
@@ -58,9 +59,12 @@ function Phishing() {
 
     // FETCH EMPLOYEES
     useEffect(() => {
-        axios.get('${import.meta.env.VITE_API_URL}/api/emp/all')
+        axios.get(`${import.meta.env.VITE_API_URL}/api/emp/all`)
             .then(res => setEmployees(res.data))
-            .catch(err => console.log("Error fetching employees", err));
+            .catch(err => {
+                console.log("Error fetching employees", err);
+                setFetchError("Unable to load employees. Backend may be starting up, please refresh.");
+            });
     }, []);
 
     const handleSendEmail = async (e) => {
@@ -192,6 +196,13 @@ function Phishing() {
                 <h1 className="text-3xl font-bold text-white mb-6 flex items-center gap-2">
                     <Mail className="text-red-500" /> Launch Phishing Attack
                 </h1>
+
+                {fetchError && (
+                    <div className="p-3 rounded-lg flex items-center gap-2 mb-4 bg-yellow-600 text-white">
+                        <XCircle className="w-5 h-5 flex-shrink-0" />
+                        {fetchError}
+                    </div>
+                )}
 
                 {/* MESSAGES */}
                 {message && (
